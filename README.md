@@ -95,16 +95,75 @@ print(f'voce teve {e} espaçõs' )
 
 8. Palíndromo: Leia uma sequência de caracteres e informe se é um palíndromo.
 
+frase = input("Digite uma palavra ou frase: ")
+
+frase_limpa = frase.replace(" ", "").lower()
+frase_invertida = frase_limpa[::-1]
+
+if frase_limpa == frase_invertida:
+    print(f"'{frase}' é um palíndromo!")
+else:
+    print(f"'{frase}' não é um palíndromo.")
 
 
 
 
 9. Verificação de CPF: Leia um CPF no formato xxx.xxx.xxx-xx e valide os dígitos verificadores.
+cpf = input("Digite apenas os números do CPF: ")
 
+c = 10
+total = 0
+for i in cpf[:9]:
+    total += int(i) * c
+    c -= 1
+
+digito1 = (total * 10) % 11
+if digito1 == 10:
+    digito1 = 0
+
+c = 11
+total = 0
+for i in cpf[:10]:
+    total += int(i) * c
+    c -= 1
+
+digito2 = (total * 10) % 11
+if digito2 == 10:
+    digito2 = 0
+
+calculados = f"{digito1}{digito2}"
+
+if calculados == cpf[9:]:
+    print(f"O CPF {cpf} é VÁLIDO! ")
+else:
+    print(f"O CPF {cpf} é INVÁLIDO! ")
 
 
 10. Número por extenso: Leia um número até 99 e mostre-o por extenso.
 
+
+unidades = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove"]
+dezenas = ["", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"]
+especiais = ["dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"]
+
+num = int(input("Digite um número entre 0 e 99: "))
+
+if 0 <= num <= 9:
+    print(unidades[num])
+
+elif 10 <= num <= 19:
+    print(especiais[num - 10])
+
+elif 20 <= num <= 99:
+    d = num // 10  
+    u = num % 10   
+    
+    if u == 0:
+        print(dezenas[d])
+    else:
+        print(f"{dezenas[d]} e {unidades[u]}")
+else:
+    print("Número fora do intervalo!")
 
 
 11. Jogo da Forca: Desenvolva um jogo simples da forca usando uma lista de palavras.
